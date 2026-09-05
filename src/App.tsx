@@ -85,6 +85,37 @@ function App() {
               placeholder="Wifi amount"
             />
           </div>
+
+          <details className="add-expense">
+            <summary aria-label="Show fields to add an expense">
+              <span className="plus-icon" aria-hidden="true">+</span>
+              <span>Add expense</span>
+            </summary>
+            <div className="add-expense-fields">
+              <div>
+                <label htmlFor="expense-name">Name</label>
+                <input
+                  id="expense-name"
+                  name="expenseName"
+                  type="text"
+                  placeholder="Name"
+                />
+              </div>
+              <div>
+                <label htmlFor="expense-amount">Amount</label>
+                <input
+                  id="expense-amount"
+                  name="expenseAmount"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  inputMode="decimal"
+                  placeholder="Amount"
+                />
+              </div>
+              <button type="button" className="add-button">Add</button>
+            </div>
+          </details>
         </form>
       </section>
 
