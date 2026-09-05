@@ -30,9 +30,9 @@ function App() {
   const billAmount = Number(electricityBill) || 0
   const waterAmount = Number(waterBill) || 0
   const wifiAmount = Number(wifiBill) || 0
-  const overallTotal = billAmount + waterAmount + wifiAmount
   const individualShare = billAmount / residents.length
   const addedExpenseTotal = addedExpenses.reduce((total, expense) => total + expense.amount, 0)
+  const overallTotal = billAmount + waterAmount + wifiAmount + addedExpenseTotal
   const sharedMonthlyTotal = waterAmount + wifiAmount + addedExpenseTotal
   const totalPeople = roomPeople.reduce((total, people) => total + (Number(people) || 0), 0)
   const allRoomsFilled = roomPeople.every((people) => people.trim() !== '' && Number(people) > 0)
