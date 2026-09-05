@@ -26,7 +26,7 @@ input::placeholder { color: #b6b1a8; }
 .room-bills { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 18px; }
 .room-bills summary { color: var(--ink); cursor: pointer; font-size: 0.86rem; font-weight: 700; }
 .room-bill-list { display: grid; gap: 10px; margin-top: 16px; }
-.room-bill { display: grid; grid-template-columns: minmax(150px, 1fr) 150px 160px 160px; align-items: center; gap: 14px; padding: 10px 12px; border: 1px solid var(--line); color: var(--ink); font-size: 0.82rem; font-weight: 700; }
+.room-bill { display: grid; grid-template-columns: minmax(150px, 1fr) 150px 160px 160px 160px; align-items: center; gap: 14px; padding: 10px 12px; border: 1px solid var(--line); color: var(--ink); font-size: 0.82rem; font-weight: 700; }
 .room-bill input { width: 150px; padding: 10px; border: 1px solid var(--line); background: var(--paper); font-size: 0.85rem; }
 .room-share-value { display: flex; flex-direction: column; gap: 4px; color: var(--ink); font-family: var(--heading); font-size: 0.8rem; font-weight: 700; }
 .room-share-value small { color: var(--muted); font: 700 0.63rem var(--body); letter-spacing: 0.05em; text-transform: uppercase; }

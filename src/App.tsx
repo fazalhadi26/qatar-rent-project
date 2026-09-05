@@ -146,6 +146,10 @@ function App() {
                     onChange={(event) => updateRoomPeople(index, event.target.value)}
                   />
                   <span className="room-share-value">
+                    <small>Monthly per person</small>
+                    {allRoomsFilled ? `QAR ${formatAmount(monthlyPerPerson)}` : 'Fill all rooms'}
+                  </span>
+                  <span className="room-share-value">
                     <small>Monthly per room</small>
                     {allRoomsFilled ? `QAR ${formatAmount((Number(roomPeople[index]) || 0) * monthlyPerPerson)}` : 'Fill all rooms'}
                   </span>
