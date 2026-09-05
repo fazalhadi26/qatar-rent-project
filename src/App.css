@@ -23,6 +23,11 @@ h2 { margin-bottom: 0; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1; }
 input { width: 100%; min-width: 0; padding: 16px 17px 16px 12px; border: 0; outline: 0; background: transparent; color: var(--ink); font: 700 1.35rem var(--heading); }
 input::placeholder { color: #b6b1a8; }
 .input-hint { margin: 10px 0 0; color: var(--muted); font-size: 0.8rem; }
+.room-bills { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 18px; }
+.room-bills summary { color: var(--ink); cursor: pointer; font-size: 0.86rem; font-weight: 700; }
+.room-bill-list { display: grid; gap: 10px; margin-top: 16px; }
+.room-bill { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 10px 12px; border: 1px solid var(--line); color: var(--ink); font-size: 0.82rem; font-weight: 700; }
+.room-bill input { width: 150px; padding: 10px; border: 1px solid var(--line); background: var(--paper); font-size: 0.85rem; }
 .results { padding-top: 28px; }
 .share-total { color: var(--accent); font-family: var(--heading); font-size: 1.25rem; letter-spacing: -0.02em; white-space: nowrap; }
 .table-wrap { margin-top: 25px; overflow-x: auto; border-top: 1px solid var(--line); }
@@ -188,5 +193,7 @@ td:last-child { font-family: var(--heading); font-size: 1.05rem; }
   th, td { padding: 14px 8px; }
   .row-number { width: 31px; }
   .add-expense-fields { grid-template-columns: 1fr; }
+  .room-bill { align-items: stretch; flex-direction: column; }
+  .room-bill input { width: 100%; }
   .bill-summary { grid-template-columns: 1fr; }
 }

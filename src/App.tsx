@@ -9,6 +9,14 @@ const residents = [
   'Liaqat Haji',
 ]
 
+const roomNames = [
+  'Anwar Bangash Room',
+  'Momtaz Ud Din Room',
+  'Junaid Ahmad Room',
+  'Museeb Ahmad Room',
+  'Liaqat Haji Room',
+]
+
 type AddedExpense = { name: string; amount: number }
 
 function App() {
@@ -108,6 +116,18 @@ function App() {
               onChange={(event) => setWifiBill(event.target.value)}
             />
           </div>
+
+          <details className="room-bills">
+            <summary>Room totals</summary>
+            <div className="room-bill-list">
+              {roomNames.map((roomName, index) => (
+                <label className="room-bill" htmlFor={`room-${index}`} key={roomName}>
+                  <span>{roomName}</span>
+                  <input id={`room-${index}`} type="number" min="0" step="0.01" inputMode="decimal" placeholder="Total person" />
+                </label>
+              ))}
+            </div>
+          </details>
 
           <details className="add-expense">
             <summary aria-label="Show fields to add an expense">
