@@ -57,6 +57,34 @@ function App() {
             />
           </div>
           <p className="input-hint" id="bill-hint">Enter any amount, for example 1500.</p>
+
+          <label htmlFor="water-bill">Water</label>
+          <div className="input-wrap">
+            <span className="currency" aria-hidden="true">QAR</span>
+            <input
+              id="water-bill"
+              name="water"
+              type="number"
+              min="0"
+              step="0.01"
+              inputMode="decimal"
+              placeholder="Water amount"
+            />
+          </div>
+
+          <label htmlFor="wifi-bill">Wifi</label>
+          <div className="input-wrap">
+            <span className="currency" aria-hidden="true">QAR</span>
+            <input
+              id="wifi-bill"
+              name="wifi"
+              type="number"
+              min="0"
+              step="0.01"
+              inputMode="decimal"
+              placeholder="Wifi amount"
+            />
+          </div>
         </form>
       </section>
 
