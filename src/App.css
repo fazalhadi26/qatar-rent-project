@@ -26,8 +26,12 @@ input::placeholder { color: #b6b1a8; }
 .room-bills { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 18px; }
 .room-bills summary { color: var(--ink); cursor: pointer; font-size: 0.86rem; font-weight: 700; }
 .room-bill-list { display: grid; gap: 10px; margin-top: 16px; }
-.room-bill { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 10px 12px; border: 1px solid var(--line); color: var(--ink); font-size: 0.82rem; font-weight: 700; }
+.room-bill { display: grid; grid-template-columns: minmax(150px, 1fr) 150px 160px 160px; align-items: center; gap: 14px; padding: 10px 12px; border: 1px solid var(--line); color: var(--ink); font-size: 0.82rem; font-weight: 700; }
 .room-bill input { width: 150px; padding: 10px; border: 1px solid var(--line); background: var(--paper); font-size: 0.85rem; }
+.room-share-value { display: flex; flex-direction: column; gap: 4px; color: var(--ink); font-family: var(--heading); font-size: 0.8rem; font-weight: 700; }
+.room-share-value small { color: var(--muted); font: 700 0.63rem var(--body); letter-spacing: 0.05em; text-transform: uppercase; }
+.room-share-counts { display: flex; justify-content: space-between; gap: 16px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.76rem; }
+.room-share-counts strong { color: var(--ink); font-family: var(--heading); }
 .results { padding-top: 28px; }
 .share-total { color: var(--accent); font-family: var(--heading); font-size: 1.25rem; letter-spacing: -0.02em; white-space: nowrap; }
 .table-wrap { margin-top: 25px; overflow-x: auto; border-top: 1px solid var(--line); }
@@ -123,6 +127,65 @@ td:last-child { font-family: var(--heading); font-size: 1.05rem; }
 
 .added-expense-row th { color: var(--ink); text-align: left; }
 
+.room-share-summary {
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+  padding-top: 26px;
+}
+
+.share-summary-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.share-summary-heading h2 { font-size: 1.7rem; }
+.share-summary-heading > span { color: var(--muted); font-size: 0.8rem; }
+
+.share-summary-totals,
+.room-share-totals {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  margin-top: 20px;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+
+.share-summary-totals div,
+.room-share-totals div {
+  display: flex;
+  min-height: 84px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 16px;
+  background: var(--paper);
+}
+
+.share-summary-totals span,
+.room-share-totals span,
+.room-share-row small {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.share-summary-totals strong,
+.room-share-totals strong {
+  color: var(--ink);
+  font: 700 1.05rem var(--heading);
+}
+
+.room-share-list { margin-top: 18px; border-top: 1px solid var(--line); }
+.room-share-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); color: var(--ink); font-size: 0.84rem; }
+.room-share-row span { font-weight: 700; }
+.room-share-row small { display: block; margin-top: 4px; }
+.room-share-row strong { color: var(--muted); font-size: 0.75rem; text-align: right; }
+
 .add-expense {
   margin-top: 26px;
   border-top: 1px solid var(--line);
@@ -193,7 +256,12 @@ td:last-child { font-family: var(--heading); font-size: 1.05rem; }
   th, td { padding: 14px 8px; }
   .row-number { width: 31px; }
   .add-expense-fields { grid-template-columns: 1fr; }
-  .room-bill { align-items: stretch; flex-direction: column; }
+  .room-bill { align-items: stretch; grid-template-columns: 1fr; }
   .room-bill input { width: 100%; }
+  .room-share-counts { align-items: flex-start; flex-direction: column; }
   .bill-summary { grid-template-columns: 1fr; }
+  .share-summary-totals,
+  .room-share-totals { grid-template-columns: 1fr; }
+  .room-share-row { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .room-share-row strong { text-align: left; }
 }

@@ -26,11 +26,23 @@ function App() {
   const [expenseName, setExpenseName] = useState('')
   const [expenseAmount, setExpenseAmount] = useState('')
   const [addedExpenses, setAddedExpenses] = useState<AddedExpense[]>([])
+  const [roomPeople, setRoomPeople] = useState<string[]>(() => roomNames.map(() => ''))
   const billAmount = Number(electricityBill) || 0
   const waterAmount = Number(waterBill) || 0
   const wifiAmount = Number(wifiBill) || 0
   const overallTotal = billAmount + waterAmount + wifiAmount
   const individualShare = billAmount / residents.length
+  const addedExpenseTotal = addedExpenses.reduce((total, expense) => total + expense.amount, 0)
+  const sharedMonthlyTotal = waterAmount + wifiAmount + addedExpenseTotal
+  const totalPeople = roomPeople.reduce((total, people) => total + (Number(people) || 0), 0)
+  const allRoomsFilled = roomPeople.every((people) => people.trim() !== '' && Number(people) > 0)
+  const totalPersonDays = totalPeople * 30
+  const dailyPerPerson = allRoomsFilled ? sharedMonthlyTotal / totalPersonDays : 0
+  const monthlyPerPerson = allRoomsFilled ? dailyPerPerson * 30 : 0
+
+  const updateRoomPeople = (index: number, value: string) => {
+    setRoomPeople((people) => people.map((current, currentIndex) => currentIndex === index ? value : current))
+  }
 
   const addExpense = () => {
     const name = expenseName.trim()
@@ -121,11 +133,32 @@ function App() {
             <summary>Room totals</summary>
             <div className="room-bill-list">
               {roomNames.map((roomName, index) => (
-                <label className="room-bill" htmlFor={`room-${index}`} key={roomName}>
+                <div className="room-bill" key={roomName}>
                   <span>{roomName}</span>
-                  <input id={`room-${index}`} type="number" min="0" step="0.01" inputMode="decimal" placeholder="Total person" />
-                </label>
+                  <input
+                    id={`room-${index}`}
+                    type="number"
+                    min="0"
+                    step="1"
+                    inputMode="numeric"
+                    placeholder="Total person"
+                    value={roomPeople[index]}
+                    onChange={(event) => updateRoomPeople(index, event.target.value)}
+                  />
+                  <span className="room-share-value">
+                    <small>Monthly per room</small>
+                    {allRoomsFilled ? `QAR ${formatAmount((Number(roomPeople[index]) || 0) * monthlyPerPerson)}` : 'Fill all rooms'}
+                  </span>
+                  <span className="room-share-value">
+                    <small>Daily per person</small>
+                    {allRoomsFilled ? `QAR ${formatAmount(dailyPerPerson)}` : 'Fill all rooms'}
+                  </span>
+                </div>
               ))}
+            </div>
+            <div className="room-share-counts">
+              <span>Total room people <strong>{totalPeople}</strong></span>
+              <span>Total person-days <strong>{totalPersonDays}</strong></span>
             </div>
           </details>
 
@@ -228,6 +261,7 @@ function App() {
             )}
           </section>
         )}
+
       </section>
     </main>
   )
