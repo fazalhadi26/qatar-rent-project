@@ -9,10 +9,29 @@ const residents = [
   'Liaqat Haji',
 ]
 
+type AddedExpense = { name: string; amount: number }
+
 function App() {
   const [electricityBill, setElectricityBill] = useState('')
+  const [waterBill, setWaterBill] = useState('')
+  const [wifiBill, setWifiBill] = useState('')
+  const [expenseName, setExpenseName] = useState('')
+  const [expenseAmount, setExpenseAmount] = useState('')
+  const [addedExpenses, setAddedExpenses] = useState<AddedExpense[]>([])
   const billAmount = Number(electricityBill) || 0
+  const waterAmount = Number(waterBill) || 0
+  const wifiAmount = Number(wifiBill) || 0
+  const overallTotal = billAmount + waterAmount + wifiAmount
   const individualShare = billAmount / residents.length
+
+  const addExpense = () => {
+    const name = expenseName.trim()
+    const amount = Number(expenseAmount)
+    if (!name || !expenseAmount || amount < 0) return
+    setAddedExpenses((expenses) => [...expenses, { name, amount }])
+    setExpenseName('')
+    setExpenseAmount('')
+  }
 
   const formatAmount = (amount: number) =>
     new Intl.NumberFormat('en-QA', {
@@ -69,6 +88,8 @@ function App() {
               step="0.01"
               inputMode="decimal"
               placeholder="Water amount"
+              value={waterBill}
+              onChange={(event) => setWaterBill(event.target.value)}
             />
           </div>
 
@@ -83,6 +104,8 @@ function App() {
               step="0.01"
               inputMode="decimal"
               placeholder="Wifi amount"
+              value={wifiBill}
+              onChange={(event) => setWifiBill(event.target.value)}
             />
           </div>
 
@@ -99,6 +122,8 @@ function App() {
                   name="expenseName"
                   type="text"
                   placeholder="Name"
+                  value={expenseName}
+                  onChange={(event) => setExpenseName(event.target.value)}
                 />
               </div>
               <div>
@@ -111,9 +136,11 @@ function App() {
                   step="0.01"
                   inputMode="decimal"
                   placeholder="Amount"
+                  value={expenseAmount}
+                  onChange={(event) => setExpenseAmount(event.target.value)}
                 />
               </div>
-              <button type="button" className="add-button">Add</button>
+              <button type="button" className="add-button" onClick={addExpense}>Add</button>
             </div>
           </details>
         </form>
@@ -146,7 +173,41 @@ function App() {
             </tbody>
           </table>
         </div>
-        <p className="total-line">Total bill <strong>QAR {formatAmount(billAmount)}</strong></p>
+
+        {(electricityBill || waterBill || wifiBill || addedExpenses.length > 0) && (
+          <section className="bill-summary" aria-label="Bill totals">
+            {electricityBill && (
+              <div className="summary-item">
+                <span>Electricity Bill</span>
+                <strong>QAR {formatAmount(billAmount)}</strong>
+              </div>
+            )}
+            {waterBill && (
+              <div className="summary-item">
+                <span>Water</span>
+                <strong>QAR {formatAmount(waterAmount)}</strong>
+              </div>
+            )}
+            {wifiBill && (
+              <div className="summary-item">
+                <span>Wifi</span>
+                <strong>QAR {formatAmount(wifiAmount)}</strong>
+              </div>
+            )}
+            {addedExpenses.map((expense, index) => (
+              <div className="summary-item added-summary" key={`${expense.name}-${expense.amount}-${index}`}>
+                <span>{expense.name}</span>
+                <strong>QAR {formatAmount(expense.amount)}</strong>
+              </div>
+            ))}
+            {(electricityBill || waterBill || wifiBill) && (
+              <div className="summary-item overall-total">
+                <span>Overall Total</span>
+                <strong>QAR {formatAmount(overallTotal)}</strong>
+              </div>
+            )}
+          </section>
+        )}
       </section>
     </main>
   )
