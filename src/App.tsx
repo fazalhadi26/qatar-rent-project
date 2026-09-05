@@ -221,6 +221,7 @@ function App() {
                 <th scope="col">Daily per person</th>
                 <th scope="col">Monthly per room</th>
                 <th scope="col">Monthly per person</th>
+                <th scope="col">Final per room</th>
               </tr>
             </thead>
             <tbody>
@@ -231,6 +232,7 @@ function App() {
                   <td>{allRoomsFilled ? `QAR ${formatAmount(dailyPerPerson)}` : 'Fill all rooms'}</td>
                   <td>{allRoomsFilled ? `QAR ${formatAmount((Number(roomPeople[index]) || 0) * monthlyPerPerson)}` : 'Fill all rooms'}</td>
                   <td>{allRoomsFilled ? `QAR ${formatAmount(monthlyPerPerson)}` : 'Fill all rooms'}</td>
+                  <td>{allRoomsFilled ? `QAR ${formatAmount(individualShare + ((Number(roomPeople[index]) || 0) * monthlyPerPerson))}` : 'Fill all rooms'}</td>
                 </tr>
               ))}
             </tbody>
