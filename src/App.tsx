@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { Download, Plus, Users } from 'lucide-react'
+import { jsPDF } from 'jspdf'
+import autoTable from 'jspdf-autotable'
 import './App.css'
 
 const residents = [
@@ -59,83 +62,140 @@ function App() {
       maximumFractionDigits: 2,
     }).format(amount)
 
+  const downloadPdf = () => {
+    const document = new jsPDF({ orientation: 'landscape' })
+    const tableBody = residents.map((resident, index) => {
+      const roomPeopleCount = Number(roomPeople[index]) || 0
+      const monthlyRoom = allRoomsFilled ? roomPeopleCount * monthlyPerPerson : 0
+      const finalRoom = individualShare + monthlyRoom
+
+      return [
+        resident,
+        `QAR ${formatAmount(individualShare)}`,
+        allRoomsFilled ? `QAR ${formatAmount(dailyPerPerson)}` : 'Fill all rooms',
+        allRoomsFilled ? `QAR ${formatAmount(monthlyRoom)}` : 'Fill all rooms',
+        allRoomsFilled ? `QAR ${formatAmount(monthlyPerPerson)}` : 'Fill all rooms',
+        allRoomsFilled ? `QAR ${formatAmount(finalRoom)}` : 'Fill all rooms',
+      ]
+    })
+
+    document.setFontSize(18)
+    document.text('Qatar Rent | Monthly Results', 14, 18)
+    document.setFontSize(9)
+    document.setTextColor(105, 113, 108)
+    document.text(`Generated ${new Date().toLocaleDateString('en-GB')}`, 14, 25)
+    autoTable(document, {
+      startY: 32,
+      head: [['Name', 'Electricity Bill', 'Daily / person', 'Monthly / room', 'Monthly / person', 'Final / room']],
+      body: tableBody,
+      foot: [['Total', `QAR ${formatAmount(billAmount)}`, '', '', '', `QAR ${formatAmount(overallTotal)}`]],
+      theme: 'grid',
+      headStyles: { fillColor: [30, 39, 35], textColor: [255, 255, 255] },
+      footStyles: { fillColor: [219, 90, 61], textColor: [255, 255, 255], fontStyle: 'bold' },
+      styles: { fontSize: 8, cellPadding: 4 },
+    })
+    document.save('qatar-rent-monthly-results.pdf')
+  }
+
   return (
     <main className="app-shell">
-      <section className="intro">
-        <p className="eyebrow">Shared home expenses</p>
-        <h1>Electricity, evenly shared.</h1>
-        <p className="subtitle">
-          Enter this month&apos;s bill to see each resident&apos;s equal share.
-        </p>
-      </section>
+      <header className="app-header">
+        <div className="brand-mark" aria-hidden="true">QR</div>
+        <div>
+          <p className="eyebrow">Household ledger</p>
+          <h1>Monthly rent split</h1>
+        </div>
+        <div className="header-meta">
+          <span className="status-dot" aria-hidden="true" />
+          <span>Ready to calculate</span>
+        </div>
+      </header>
 
-      <section className="bill-panel" aria-labelledby="bill-heading">
+      <div className="workspace">
+      <section className="bill-panel panel" aria-labelledby="bill-heading">
         <div className="panel-heading">
           <div>
             <p className="eyebrow">Monthly calculation</p>
-            <h2 id="bill-heading">Electricity Bill</h2>
+            <h2 id="bill-heading">Enter your bills</h2>
           </div>
-          <span className="resident-count">{residents.length} residents</span>
+          <span className="panel-tag"><Users size={14} /> {residents.length} residents</span>
         </div>
 
         <form className="bill-form" onSubmit={(event) => event.preventDefault()}>
-          <label htmlFor="electricity-bill">Electricity Bill</label>
-          <div className="input-wrap">
-            <span className="currency" aria-hidden="true">QAR</span>
-            <input
-              id="electricity-bill"
-              name="electricityBill"
-              type="number"
-              min="0"
-              step="0.01"
-              inputMode="decimal"
-              placeholder="1500"
-              value={electricityBill}
-              onChange={(event) => setElectricityBill(event.target.value)}
-              aria-describedby="bill-hint"
-            />
-          </div>
-          <p className="input-hint" id="bill-hint">Enter any amount, for example 1500.</p>
+          <div className="bill-input-grid">
+            <div className="bill-field">
+              <label htmlFor="electricity-bill">Electricity Bill</label>
+              <div className="input-wrap">
+                <span className="currency" aria-hidden="true">QAR</span>
+                <input
+                  id="electricity-bill"
+                  name="electricityBill"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  inputMode="decimal"
+                  placeholder=""
+                  value={electricityBill}
+                  onChange={(event) => setElectricityBill(event.target.value)}
+                />
+              </div>
+            </div>
 
-          <label htmlFor="water-bill">Water</label>
-          <div className="input-wrap">
-            <span className="currency" aria-hidden="true">QAR</span>
-            <input
-              id="water-bill"
-              name="water"
-              type="number"
-              min="0"
-              step="0.01"
-              inputMode="decimal"
-              placeholder="Water amount"
-              value={waterBill}
-              onChange={(event) => setWaterBill(event.target.value)}
-            />
-          </div>
+            <div className="bill-field">
+              <label htmlFor="water-bill">Water</label>
+              <div className="input-wrap">
+                <span className="currency" aria-hidden="true">QAR</span>
+                <input
+                  id="water-bill"
+                  name="water"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  inputMode="decimal"
+                  placeholder="Water amount"
+                  value={waterBill}
+                  onChange={(event) => setWaterBill(event.target.value)}
+                />
+              </div>
+            </div>
 
-          <label htmlFor="wifi-bill">Wifi</label>
-          <div className="input-wrap">
-            <span className="currency" aria-hidden="true">QAR</span>
-            <input
-              id="wifi-bill"
-              name="wifi"
-              type="number"
-              min="0"
-              step="0.01"
-              inputMode="decimal"
-              placeholder="Wifi amount"
-              value={wifiBill}
-              onChange={(event) => setWifiBill(event.target.value)}
-            />
+            <div className="bill-field">
+              <label htmlFor="wifi-bill">Wifi</label>
+              <div className="input-wrap">
+                <span className="currency" aria-hidden="true">QAR</span>
+                <input
+                  id="wifi-bill"
+                  name="wifi"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  inputMode="decimal"
+                  placeholder="Wifi amount"
+                  value={wifiBill}
+                  onChange={(event) => setWifiBill(event.target.value)}
+                />
+              </div>
+            </div>
           </div>
 
           <details className="room-bills">
-            <summary>Room totals</summary>
+            <summary>
+              <span>Room totals</span>
+              <small>People and shared costs</small>
+            </summary>
+            <div className="room-bill-head" aria-hidden="true">
+              <span>Room</span>
+              <span>People</span>
+              <span>Monthly / person</span>
+              <span>Monthly / room</span>
+              <span>Daily / person</span>
+            </div>
             <div className="room-bill-list">
               {roomNames.map((roomName, index) => (
                 <div className="room-bill" key={roomName}>
-                  <span>{roomName}</span>
+                  <span className="room-name">{roomName}</span>
                   <input
+                    className="people-input"
                     id={`room-${index}`}
                     type="number"
                     min="0"
@@ -197,19 +257,21 @@ function App() {
                   onChange={(event) => setExpenseAmount(event.target.value)}
                 />
               </div>
-              <button type="button" className="add-button" onClick={addExpense}>Add</button>
+              <button type="button" className="add-button" onClick={addExpense}><Plus size={15} /> Add expense</button>
             </div>
           </details>
         </form>
       </section>
 
-      <section className="results" aria-labelledby="results-heading">
+      <section className="results panel" aria-labelledby="results-heading">
         <div className="results-heading">
           <div>
-            <p className="eyebrow">The split</p>
+            <p className="eyebrow">Live breakdown</p>
             <h2 id="results-heading">Each person pays</h2>
           </div>
-          <strong className="share-total">QAR {formatAmount(individualShare)}</strong>
+          <button className="icon-button" type="button" onClick={downloadPdf} title="Download results as PDF" aria-label="Download results as PDF">
+            <Download size={18} />
+          </button>
         </div>
 
         <div className="table-wrap">
@@ -275,6 +337,7 @@ function App() {
         )}
 
       </section>
+      </div>
     </main>
   )
 }
