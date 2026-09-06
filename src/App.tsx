@@ -84,8 +84,24 @@ function App() {
     document.setFontSize(9)
     document.setTextColor(105, 113, 108)
     document.text(`Generated ${new Date().toLocaleDateString('en-GB')}`, 14, 25)
+    const billSummary = [
+      ['Electricity Bill', `QAR ${formatAmount(billAmount)}`],
+      ['Water', `QAR ${formatAmount(waterAmount)}`],
+      ['Wifi', `QAR ${formatAmount(wifiAmount)}`],
+      ...addedExpenses.map((expense) => [expense.name, `QAR ${formatAmount(expense.amount)}`]),
+      ['Overall Total', `QAR ${formatAmount(overallTotal)}`],
+    ]
     autoTable(document, {
-      startY: 32,
+      startY: 30,
+      head: [['Bill totals', 'Amount']],
+      body: billSummary,
+      theme: 'grid',
+      headStyles: { fillColor: [30, 39, 35], textColor: [255, 255, 255] },
+      styles: { fontSize: 8, cellPadding: 3 },
+      columnStyles: { 1: { halign: 'right' } },
+    })
+    autoTable(document, {
+      startY: 30 + (billSummary.length + 1) * 9 + 10,
       head: [['Name', 'Electricity Bill', 'Daily / person', 'Monthly / room', 'Monthly / person', 'Final / room']],
       body: tableBody,
       foot: [['Total', `QAR ${formatAmount(billAmount)}`, '', '', '', `QAR ${formatAmount(overallTotal)}`]],
