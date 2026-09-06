@@ -16,11 +16,12 @@ h2 { margin-bottom: 0; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1; }
 .panel-heading, .results-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
 .resident-count { padding: 7px 11px; border: 1px solid var(--line); color: var(--muted); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
 .bill-form { max-width: 450px; margin-top: 28px; }
-.bill-form label { display: block; margin-bottom: 9px; color: var(--ink); font-size: 0.86rem; font-weight: 700; }
-.input-wrap { display: flex; align-items: center; border-bottom: 2px solid var(--ink); background: var(--paper); transition: border-color 160ms ease, box-shadow 160ms ease; }
-.input-wrap:focus-within { border-color: var(--accent); box-shadow: 0 3px 0 var(--accent); }
-.currency { padding-left: 17px; color: var(--accent); font-size: 0.76rem; font-weight: 800; letter-spacing: 0.08em; }
-input { width: 100%; min-width: 0; padding: 16px 17px 16px 12px; border: 0; outline: 0; background: transparent; color: var(--ink); font: 700 1.35rem var(--heading); }
+.bill-form label { display: block; margin-bottom: 10px; color: var(--ink); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.bill-input-grid .bill-field { padding: 16px; border: 1px solid var(--line); border-top: 3px solid var(--accent); background: #fff; }
+.input-wrap { display: flex; min-height: 54px; align-items: center; border: 1px solid var(--line); background: var(--paper); transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease; }
+.input-wrap:focus-within { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px rgba(219, 90, 61, 0.12); }
+.currency { display: inline-flex; align-self: stretch; align-items: center; padding: 0 12px; border-right: 1px solid var(--line); color: var(--accent); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; }
+input { width: 100%; min-width: 0; padding: 14px 13px; border: 0; outline: 0; background: transparent; color: var(--ink); font: 700 1.25rem var(--heading); }
 input::placeholder { color: #b6b1a8; }
 .input-hint { margin: 10px 0 0; color: var(--muted); font-size: 0.8rem; }
 .room-bills { margin-top: 26px; border: 1px solid var(--line); background: #fff; }

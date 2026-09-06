@@ -174,7 +174,7 @@ function App() {
                   min="0"
                   step="0.01"
                   inputMode="decimal"
-                  placeholder=""
+                  placeholder="Electricity amount"
                   value={electricityBill}
                   onChange={(event) => setElectricityBill(event.target.value)}
                 />
