@@ -71,11 +71,12 @@ function App() {
       const finalRoom = individualShare + monthlyRoom
 
       return [
+        String(index + 1).padStart(2, '0'),
         resident,
         `QAR ${formatAmount(individualShare)}`,
         allRoomsFilled ? `QAR ${formatAmount(dailyPerPerson)}` : 'Fill all rooms',
-        allRoomsFilled ? `QAR ${formatAmount(monthlyRoom)}` : 'Fill all rooms',
         allRoomsFilled ? `QAR ${formatAmount(monthlyPerPerson)}` : 'Fill all rooms',
+        allRoomsFilled ? `QAR ${formatAmount(monthlyRoom)}` : 'Fill all rooms',
         allRoomsFilled ? `QAR ${formatAmount(finalRoom)}` : 'Fill all rooms',
       ]
     })
@@ -125,9 +126,9 @@ function App() {
     })
     autoTable(document, {
       startY: tableStartY,
-      head: [['Name', 'Electricity Bill', 'Daily / person', 'Monthly / room', 'Monthly / person', 'Final / room']],
+      head: [['#', 'Name', 'Electricity Bill', 'Daily / person', 'Monthly / person', 'Monthly / room', 'Final / room']],
       body: tableBody,
-      foot: [['Total', `QAR ${formatAmount(billAmount)}`, '', '', '', `QAR ${formatAmount(overallTotal)}`]],
+      foot: [['', 'Total', `QAR ${formatAmount(billAmount)}`, '', '', '', `QAR ${formatAmount(overallTotal)}`]],
       theme: 'grid',
       headStyles: { fillColor: [30, 39, 35], textColor: [255, 255, 255] },
       footStyles: { fillColor: [219, 90, 61], textColor: [255, 255, 255], fontStyle: 'bold' },
