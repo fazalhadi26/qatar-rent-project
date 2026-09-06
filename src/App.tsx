@@ -39,9 +39,9 @@ function App() {
   const sharedMonthlyTotal = waterAmount + wifiAmount + addedExpenseTotal
   const totalPeople = roomPeople.reduce((total, people) => total + (Number(people) || 0), 0)
   const allRoomsFilled = roomPeople.every((people) => people.trim() !== '' && Number(people) > 0)
-  const totalPersonDays = totalPeople * 30
+  const totalPersonDays = totalPeople * 31
   const dailyPerPerson = allRoomsFilled ? sharedMonthlyTotal / totalPersonDays : 0
-  const monthlyPerPerson = allRoomsFilled ? dailyPerPerson * 30 : 0
+  const monthlyPerPerson = allRoomsFilled ? dailyPerPerson * 31 : 0
 
   const updateRoomPeople = (index: number, value: string) => {
     setRoomPeople((people) => people.map((current, currentIndex) => currentIndex === index ? value : current))
