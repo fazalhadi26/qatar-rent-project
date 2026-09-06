@@ -74,10 +74,10 @@ function App() {
         resident,
         `QAR ${formatAmount(individualShare)}`,
         String(roomPeopleCount),
-        allRoomsFilled ? `QAR ${formatAmount(dailyPerPerson)}` : 'Fill all rooms',
-        allRoomsFilled ? `QAR ${formatAmount(monthlyPerPerson)}` : 'Fill all rooms',
-        allRoomsFilled ? `QAR ${formatAmount(monthlyRoom)}` : 'Fill all rooms',
-        allRoomsFilled ? `QAR ${formatAmount(finalRoom)}` : 'Fill all rooms',
+        allRoomsFilled ? `QAR ${formatAmount(dailyPerPerson)}` : 'QAR 0.00',
+        allRoomsFilled ? `QAR ${formatAmount(monthlyPerPerson)}` : 'QAR 0.00',
+        allRoomsFilled ? `QAR ${formatAmount(monthlyRoom)}` : 'QAR 0.00',
+        allRoomsFilled ? `QAR ${formatAmount(finalRoom)}` : 'QAR 0.00',
       ]
     })
 
@@ -282,15 +282,15 @@ function App() {
                   />
                   <span className="room-share-value">
                     <small>Monthly per person</small>
-                    {allRoomsFilled ? `QAR ${formatAmount(monthlyPerPerson)}` : 'Fill all rooms'}
+                    {allRoomsFilled ? `QAR ${formatAmount(monthlyPerPerson)}` : 'QAR 0.00'}
                   </span>
                   <span className="room-share-value">
                     <small>Monthly per room</small>
-                    {allRoomsFilled ? `QAR ${formatAmount((Number(roomPeople[index]) || 0) * monthlyPerPerson)}` : 'Fill all rooms'}
+                    {allRoomsFilled ? `QAR ${formatAmount((Number(roomPeople[index]) || 0) * monthlyPerPerson)}` : 'QAR 0.00'}
                   </span>
                   <span className="room-share-value">
                     <small>Daily per person</small>
-                    {allRoomsFilled ? `QAR ${formatAmount(dailyPerPerson)}` : 'Fill all rooms'}
+                    {allRoomsFilled ? `QAR ${formatAmount(dailyPerPerson)}` : 'QAR 0.00'}
                   </span>
                 </div>
               ))}
@@ -333,10 +333,10 @@ function App() {
                   <td><span className="row-number">0{index + 1}</span>{resident}</td>
                   <td>QAR {formatAmount(individualShare)}</td>
                   <td>{Number(roomPeople[index]) || 0}</td>
-                  <td>{allRoomsFilled ? `QAR ${formatAmount(dailyPerPerson)}` : 'Fill all rooms'}</td>
-                  <td>{allRoomsFilled ? `QAR ${formatAmount(monthlyPerPerson)}` : 'Fill all rooms'}</td>
-                  <td>{allRoomsFilled ? `QAR ${formatAmount((Number(roomPeople[index]) || 0) * monthlyPerPerson)}` : 'Fill all rooms'}</td>
-                  <td>{allRoomsFilled ? `QAR ${formatAmount(individualShare + ((Number(roomPeople[index]) || 0) * monthlyPerPerson))}` : 'Fill all rooms'}</td>
+                  <td>{allRoomsFilled ? `QAR ${formatAmount(dailyPerPerson)}` : 'QAR 0.00'}</td>
+                  <td>{allRoomsFilled ? `QAR ${formatAmount(monthlyPerPerson)}` : 'QAR 0.00'}</td>
+                  <td>{allRoomsFilled ? `QAR ${formatAmount((Number(roomPeople[index]) || 0) * monthlyPerPerson)}` : 'QAR 0.00'}</td>
+                  <td>{allRoomsFilled ? `QAR ${formatAmount(individualShare + ((Number(roomPeople[index]) || 0) * monthlyPerPerson))}` : 'QAR 0.00'}</td>
                 </tr>
               ))}
             </tbody>
