@@ -71,12 +71,12 @@ function App() {
       const finalRoom = individualShare + monthlyRoom
 
       return [
-        String(index + 1).padStart(2, '0'),
         resident,
         `QAR ${formatAmount(individualShare)}`,
+        String(roomPeopleCount),
         allRoomsFilled ? `QAR ${formatAmount(dailyPerPerson)}` : 'Fill all rooms',
-        allRoomsFilled ? `QAR ${formatAmount(monthlyPerPerson)}` : 'Fill all rooms',
         allRoomsFilled ? `QAR ${formatAmount(monthlyRoom)}` : 'Fill all rooms',
+        allRoomsFilled ? `QAR ${formatAmount(monthlyPerPerson)}` : 'Fill all rooms',
         allRoomsFilled ? `QAR ${formatAmount(finalRoom)}` : 'Fill all rooms',
       ]
     })
@@ -126,9 +126,9 @@ function App() {
     })
     autoTable(document, {
       startY: tableStartY,
-      head: [['#', 'Name', 'Electricity Bill', 'Daily / person', 'Monthly / person', 'Monthly / room', 'Final / room']],
+      head: [['Name', 'Electricity Bill', 'Total Person', 'Daily / person', 'Monthly / room', 'Monthly / person', 'Final / room']],
       body: tableBody,
-      foot: [['', 'Total', `QAR ${formatAmount(billAmount)}`, '', '', '', `QAR ${formatAmount(overallTotal)}`]],
+      foot: [['Total', `QAR ${formatAmount(billAmount)}`, String(totalPeople), '', '', '', `QAR ${formatAmount(overallTotal)}`]],
       theme: 'grid',
       headStyles: { fillColor: [30, 39, 35], textColor: [255, 255, 255] },
       footStyles: { fillColor: [219, 90, 61], textColor: [255, 255, 255], fontStyle: 'bold' },
@@ -320,6 +320,7 @@ function App() {
               <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Electricity Bill</th>
+                <th scope="col">Total Person</th>
                 <th scope="col">Daily per person</th>
                 <th scope="col">Monthly per room</th>
                 <th scope="col">Monthly per person</th>
@@ -331,6 +332,7 @@ function App() {
                 <tr key={resident}>
                   <td><span className="row-number">0{index + 1}</span>{resident}</td>
                   <td>QAR {formatAmount(individualShare)}</td>
+                  <td>{Number(roomPeople[index]) || 0}</td>
                   <td>{allRoomsFilled ? `QAR ${formatAmount(dailyPerPerson)}` : 'Fill all rooms'}</td>
                   <td>{allRoomsFilled ? `QAR ${formatAmount((Number(roomPeople[index]) || 0) * monthlyPerPerson)}` : 'Fill all rooms'}</td>
                   <td>{allRoomsFilled ? `QAR ${formatAmount(monthlyPerPerson)}` : 'Fill all rooms'}</td>
