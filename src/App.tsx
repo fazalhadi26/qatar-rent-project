@@ -64,6 +64,7 @@ function App() {
 
   const downloadPdf = () => {
     const document = new jsPDF({ orientation: 'landscape' })
+    const pageWidth = document.internal.pageSize.getWidth()
     const tableBody = residents.map((resident, index) => {
       const roomPeopleCount = Number(roomPeople[index]) || 0
       const monthlyRoom = allRoomsFilled ? roomPeopleCount * monthlyPerPerson : 0
@@ -79,29 +80,51 @@ function App() {
       ]
     })
 
-    document.setFontSize(18)
-    document.text('Qatar Rent | Monthly Results', 14, 18)
-    document.setFontSize(9)
+    document.setFillColor(255, 255, 255)
+    document.rect(0, 0, pageWidth, 40, 'F')
+    document.setDrawColor(219, 90, 61)
+    document.setLineWidth(0.7)
+    document.line(14, 36, pageWidth - 14, 36)
+    document.setFillColor(219, 90, 61)
+    document.roundedRect(14, 9, 24, 22, 2, 2, 'F')
+    document.setTextColor(255, 255, 255)
+    document.setFontSize(13)
+    document.setFont('helvetica', 'bold')
+    document.text('QR', 20, 23)
+    document.setTextColor(30, 39, 35)
+    document.setFontSize(17)
+    document.text('MONTHLY EXPENSE STATEMENT', 45, 17)
+    document.setFontSize(8)
+    document.setFont('helvetica', 'normal')
     document.setTextColor(105, 113, 108)
-    document.text(`Generated ${new Date().toLocaleDateString('en-GB')}`, 14, 25)
-    const billSummary = [
+    document.text('Electricity / Water / Wi-Fi split', 45, 26)
+    document.setFontSize(8)
+    document.setFont('helvetica', 'bold')
+    document.setTextColor(30, 39, 35)
+    document.text('CREATED BY SYED FAZAL', pageWidth - 14, 16, { align: 'right' })
+    document.setFont('helvetica', 'normal')
+    document.setTextColor(105, 113, 108)
+    document.text(new Date().toLocaleDateString('en-GB'), pageWidth - 14, 26, { align: 'right' })
+
+    const expenseRows = [
       ['Electricity Bill', `QAR ${formatAmount(billAmount)}`],
       ['Water', `QAR ${formatAmount(waterAmount)}`],
-      ['Wifi', `QAR ${formatAmount(wifiAmount)}`],
+      ['Wi-Fi', `QAR ${formatAmount(wifiAmount)}`],
       ...addedExpenses.map((expense) => [expense.name, `QAR ${formatAmount(expense.amount)}`]),
       ['Overall Total', `QAR ${formatAmount(overallTotal)}`],
     ]
+    const tableStartY = 50 + (expenseRows.length + 1) * 9 + 8
     autoTable(document, {
-      startY: 30,
-      head: [['Bill totals', 'Amount']],
-      body: billSummary,
+      startY: 50,
+      head: [['EXPENSE', 'AMOUNT']],
+      body: expenseRows,
       theme: 'grid',
       headStyles: { fillColor: [30, 39, 35], textColor: [255, 255, 255] },
       styles: { fontSize: 8, cellPadding: 3 },
       columnStyles: { 1: { halign: 'right' } },
     })
     autoTable(document, {
-      startY: 30 + (billSummary.length + 1) * 9 + 10,
+      startY: tableStartY,
       head: [['Name', 'Electricity Bill', 'Daily / person', 'Monthly / room', 'Monthly / person', 'Final / room']],
       body: tableBody,
       foot: [['Total', `QAR ${formatAmount(billAmount)}`, '', '', '', `QAR ${formatAmount(overallTotal)}`]],
