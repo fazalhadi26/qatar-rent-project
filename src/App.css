@@ -18,7 +18,7 @@ h2 { margin-bottom: 0; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1; }
 .bill-form { max-width: 450px; margin-top: 28px; }
 .bill-form label { display: block; margin-bottom: 10px; color: var(--ink); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
 .bill-input-grid .bill-field { padding: 16px; border: 1px solid var(--line); border-top: 3px solid var(--accent); background: var(--paper); }
-.input-wrap { display: flex; min-height: 54px; align-items: center; border: 1px solid var(--line); background: var(--paper); transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease; }
+.input-wrap { display: flex; min-height: 54px; align-items: center; border: 1px solid var(--ink); background: var(--paper); transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease; }
 .input-wrap:focus-within { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.12); }
 .currency { display: inline-flex; align-self: stretch; align-items: center; padding: 0 12px; border-right: 1px solid var(--line); color: var(--accent); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; }
 input { width: 100%; min-width: 0; padding: 14px 13px; border: 0; outline: 0; background: transparent; color: var(--ink); font: 700 1.25rem var(--heading); }
@@ -36,7 +36,7 @@ input::placeholder { color: #a58e7a; }
 .room-bill-list { display: grid; gap: 1px; background: var(--line); }
 .room-bill { padding: 12px 16px; background: #fff; color: var(--ink); font-size: 0.8rem; font-weight: 700; }
 .room-bill:hover { background: #fcfbf6; }
-.room-bill input { width: 100%; padding: 10px 11px; border: 1px solid var(--line); background: var(--paper); font-size: 0.85rem; }
+.room-bill input { width: 100%; padding: 10px 11px; border: 1px solid var(--ink); background: var(--paper); font-size: 0.85rem; }
 .room-bill input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.12); }
 .room-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .people-input { border-left: 3px solid var(--accent) !important; }
@@ -239,7 +239,7 @@ td:last-child { font-family: var(--heading); font-size: 1.05rem; }
 
 .add-expense-fields input {
   width: 100%;
-  border: 1px solid var(--line);
+  border: 1px solid var(--ink);
   background: var(--paper);
   font-size: 0.95rem;
 }
