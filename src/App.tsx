@@ -83,16 +83,16 @@ function App() {
 
     document.setFillColor(255, 255, 255)
     document.rect(0, 0, pageWidth, 40, 'F')
-    document.setDrawColor(219, 90, 61)
+    document.setDrawColor(17, 17, 17)
     document.setLineWidth(0.7)
     document.line(14, 36, pageWidth - 14, 36)
-    document.setFillColor(219, 90, 61)
+    document.setFillColor(17, 17, 17)
     document.roundedRect(14, 9, 24, 22, 2, 2, 'F')
     document.setTextColor(255, 255, 255)
     document.setFontSize(13)
     document.setFont('helvetica', 'bold')
     document.text('QR', 20, 23)
-    document.setTextColor(30, 39, 35)
+    document.setTextColor(17, 17, 17)
     document.setFontSize(17)
     document.text('MONTHLY EXPENSE STATEMENT', 45, 17)
     document.setFontSize(8)
@@ -101,7 +101,7 @@ function App() {
     document.text('Electricity / Water / Wi-Fi split', 45, 26)
     document.setFontSize(8)
     document.setFont('helvetica', 'bold')
-    document.setTextColor(30, 39, 35)
+    document.setTextColor(17, 17, 17)
     document.text('CREATED BY SYED FAZAL', pageWidth - 14, 16, { align: 'right' })
     document.setFont('helvetica', 'normal')
     document.setTextColor(105, 113, 108)
@@ -120,7 +120,7 @@ function App() {
       head: [['EXPENSE', 'AMOUNT']],
       body: expenseRows,
       theme: 'grid',
-      headStyles: { fillColor: [30, 39, 35], textColor: [255, 255, 255] },
+      headStyles: { fillColor: [17, 17, 17], textColor: [255, 255, 255] },
       styles: { fontSize: 8, cellPadding: 3 },
       columnStyles: { 1: { halign: 'right' } },
     })
@@ -130,8 +130,8 @@ function App() {
       body: tableBody,
       foot: [['Total', `QAR ${formatAmount(billAmount)}`, String(totalPeople), '', '', '', `QAR ${formatAmount(overallTotal)}`]],
       theme: 'grid',
-      headStyles: { fillColor: [30, 39, 35], textColor: [255, 255, 255] },
-      footStyles: { fillColor: [219, 90, 61], textColor: [255, 255, 255], fontStyle: 'bold' },
+      headStyles: { fillColor: [17, 17, 17], textColor: [255, 255, 255] },
+      footStyles: { fillColor: [17, 17, 17], textColor: [255, 255, 255], fontStyle: 'bold' },
       styles: { fontSize: 8, cellPadding: 4 },
     })
     document.save('qatar-rent-monthly-results.pdf')
@@ -158,7 +158,7 @@ function App() {
             <p className="eyebrow">Monthly calculation</p>
             <h2 id="bill-heading">Enter your bills</h2>
           </div>
-          <span className="panel-tag"><Users size={14} /> {residents.length} residents</span>
+          <span className="panel-tag"><Users size={18} /> {residents.length} residents</span>
         </div>
 
         <form className="bill-form" onSubmit={(event) => event.preventDefault()}>
@@ -218,6 +218,41 @@ function App() {
             </div>
           </div>
 
+          <details className="add-expense">
+            <summary aria-label="Show fields to add an expense">
+              <span className="plus-icon" aria-hidden="true">+</span>
+              <span>Add expense</span>
+            </summary>
+            <div className="add-expense-fields">
+              <div>
+                <label htmlFor="expense-name">Name</label>
+                <input
+                  id="expense-name"
+                  name="expenseName"
+                  type="text"
+                  placeholder="Name"
+                  value={expenseName}
+                  onChange={(event) => setExpenseName(event.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="expense-amount">Amount</label>
+                <input
+                  id="expense-amount"
+                  name="expenseAmount"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  inputMode="decimal"
+                  placeholder="Amount"
+                  value={expenseAmount}
+                  onChange={(event) => setExpenseAmount(event.target.value)}
+                />
+              </div>
+              <button type="button" className="add-button" onClick={addExpense}><Plus size={22} strokeWidth={2.6} /> Add expense</button>
+            </div>
+          </details>
+
           <details className="room-bills">
             <summary>
               <span>Room totals</span>
@@ -265,41 +300,6 @@ function App() {
               <span>Total person-days <strong>{totalPersonDays}</strong></span>
             </div>
           </details>
-
-          <details className="add-expense">
-            <summary aria-label="Show fields to add an expense">
-              <span className="plus-icon" aria-hidden="true">+</span>
-              <span>Add expense</span>
-            </summary>
-            <div className="add-expense-fields">
-              <div>
-                <label htmlFor="expense-name">Name</label>
-                <input
-                  id="expense-name"
-                  name="expenseName"
-                  type="text"
-                  placeholder="Name"
-                  value={expenseName}
-                  onChange={(event) => setExpenseName(event.target.value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="expense-amount">Amount</label>
-                <input
-                  id="expense-amount"
-                  name="expenseAmount"
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  inputMode="decimal"
-                  placeholder="Amount"
-                  value={expenseAmount}
-                  onChange={(event) => setExpenseAmount(event.target.value)}
-                />
-              </div>
-              <button type="button" className="add-button" onClick={addExpense}><Plus size={15} /> Add expense</button>
-            </div>
-          </details>
         </form>
       </section>
 
@@ -310,7 +310,7 @@ function App() {
             <h2 id="results-heading">Each person pays</h2>
           </div>
           <button className="icon-button" type="button" onClick={downloadPdf} title="Download results as PDF" aria-label="Download results as PDF">
-            <Download size={18} />
+            <Download size={23} strokeWidth={2.3} />
           </button>
         </div>
 

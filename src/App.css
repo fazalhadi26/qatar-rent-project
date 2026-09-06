@@ -17,14 +17,14 @@ h2 { margin-bottom: 0; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1; }
 .resident-count { padding: 7px 11px; border: 1px solid var(--line); color: var(--muted); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
 .bill-form { max-width: 450px; margin-top: 28px; }
 .bill-form label { display: block; margin-bottom: 10px; color: var(--ink); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
-.bill-input-grid .bill-field { padding: 16px; border: 1px solid var(--line); border-top: 3px solid var(--accent); background: #fff; }
+.bill-input-grid .bill-field { padding: 16px; border: 1px solid var(--line); border-top: 3px solid var(--accent); background: var(--paper); }
 .input-wrap { display: flex; min-height: 54px; align-items: center; border: 1px solid var(--line); background: var(--paper); transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease; }
-.input-wrap:focus-within { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px rgba(219, 90, 61, 0.12); }
+.input-wrap:focus-within { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.12); }
 .currency { display: inline-flex; align-self: stretch; align-items: center; padding: 0 12px; border-right: 1px solid var(--line); color: var(--accent); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; }
 input { width: 100%; min-width: 0; padding: 14px 13px; border: 0; outline: 0; background: transparent; color: var(--ink); font: 700 1.25rem var(--heading); }
-input::placeholder { color: #b6b1a8; }
+input::placeholder { color: #a58e7a; }
 .input-hint { margin: 10px 0 0; color: var(--muted); font-size: 0.8rem; }
-.room-bills { margin-top: 26px; border: 1px solid var(--line); background: #fff; }
+.room-bills { margin-top: 26px; border: 1px solid var(--line); background: var(--paper); }
 .room-bills summary { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 16px 18px; color: var(--ink); cursor: pointer; font-size: 0.92rem; font-weight: 700; list-style: none; }
 .room-bills summary::-webkit-details-marker { display: none; }
 .room-bills summary::after { content: '+'; display: grid; width: 24px; height: 24px; place-items: center; border: 1px solid var(--line); color: var(--accent); font: 500 1rem/1 var(--heading); }
@@ -37,12 +37,12 @@ input::placeholder { color: #b6b1a8; }
 .room-bill { padding: 12px 16px; background: #fff; color: var(--ink); font-size: 0.8rem; font-weight: 700; }
 .room-bill:hover { background: #fcfbf6; }
 .room-bill input { width: 100%; padding: 10px 11px; border: 1px solid var(--line); background: var(--paper); font-size: 0.85rem; }
-.room-bill input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(219, 90, 61, 0.12); }
+.room-bill input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.12); }
 .room-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .people-input { border-left: 3px solid var(--accent) !important; }
 .room-share-value { display: flex; flex-direction: column; gap: 4px; color: var(--ink); font-family: var(--heading); font-size: 0.78rem; font-weight: 700; }
 .room-share-value small { color: var(--muted); font: 700 0.63rem var(--body); letter-spacing: 0.05em; text-transform: uppercase; }
-.room-share-counts { display: flex; justify-content: space-between; gap: 16px; padding: 13px 16px; border-top: 1px solid var(--line); background: #fbfaf5; color: var(--muted); font-size: 0.76rem; }
+.room-share-counts { display: flex; justify-content: space-between; gap: 16px; padding: 13px 16px; border-top: 1px solid var(--line); background: #f3f3f3; color: var(--muted); font-size: 0.76rem; }
 .room-share-counts strong { color: var(--ink); font-family: var(--heading); }
 .results { padding-top: 28px; }
 .share-total { color: var(--accent); font-family: var(--heading); font-size: 1.25rem; letter-spacing: -0.02em; white-space: nowrap; }
@@ -91,7 +91,7 @@ td:last-child { font-family: var(--heading); font-size: 1.05rem; }
 }
 
 .overall-total {
-  background: #000;
+  background: var(--ink);
 }
 
 .overall-total span,
@@ -110,7 +110,7 @@ td:last-child { font-family: var(--heading); font-size: 1.05rem; }
 .overall-total-row th,
 .overall-total-row td {
   border-top: 2px solid var(--accent);
-  background: #000;
+  background: var(--ink);
   color: #fff;
   font-weight: 800;
 }
@@ -132,7 +132,7 @@ td:last-child { font-family: var(--heading); font-size: 1.05rem; }
 
 .added-expense-row th,
 .added-expense-row td {
-  background: rgba(219, 90, 61, 0.06);
+  background: rgba(17, 17, 17, 0.06);
   color: var(--muted);
   font-size: 0.82rem;
 }
@@ -216,7 +216,7 @@ td:last-child { font-family: var(--heading); font-size: 1.05rem; }
 }
 
 .add-expense summary::-webkit-details-marker { display: none; }
-.plus-icon { color: var(--accent); font: 500 1.4rem/0.8 var(--heading); }
+.plus-icon { color: #2f8f5b; font: 500 2rem/0.75 var(--heading); }
 .add-expense[open] .plus-icon { transform: rotate(45deg); }
 
 .add-expense-fields {
@@ -301,13 +301,13 @@ td:last-child { font-family: var(--heading); font-size: 1.05rem; }
 .app-header .eyebrow { margin-bottom: 6px; }
 .brand-mark { display: grid; width: 44px; height: 44px; place-items: center; background: var(--ink); color: #fff; font: 700 0.85rem var(--heading); letter-spacing: 0.08em; }
 .header-meta { display: flex; align-items: center; gap: 8px; margin-left: auto; color: var(--muted); font-size: 0.72rem; }
-.status-dot { width: 7px; height: 7px; border-radius: 50%; background: #56a779; box-shadow: 0 0 0 4px rgba(86, 167, 121, 0.13); }
+.status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.12); }
 .workspace { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 22px; }
-.panel { border: 1px solid var(--line); background: rgba(247, 246, 240, 0.72); }
+.panel { border: 1px solid var(--line); background: rgba(255, 255, 255, 0.88); }
 .bill-panel { padding: 24px; }
 .results { min-width: 0; padding: 24px; }
 .panel-heading { align-items: center; }
-.panel-tag { display: inline-flex; align-items: center; gap: 6px; padding: 7px 9px; background: var(--ink); color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+.panel-tag { display: inline-flex; align-items: center; gap: 8px; padding: 8px 11px; background: var(--ink); color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
 .bill-form { max-width: none; margin-top: 25px; }
 .bill-input-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .bill-field label { margin-top: 0; }
@@ -319,11 +319,13 @@ td:last-child { font-family: var(--heading); font-size: 1.05rem; }
 .room-bill, .room-bill-head { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .room-share-counts { flex-direction: column; }
 .add-expense-fields { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; }
-.add-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; width: 100%; }
+.add-button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; width: 100%; }
+.add-button svg { color: #2f8f5b; }
 .results-heading { padding-bottom: 18px; border-bottom: 1px solid var(--line); }
 .results-heading h2 { font-size: 1.75rem; }
-.icon-button { display: inline-grid; width: 40px; height: 40px; place-items: center; border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; transition: background 160ms ease, color 160ms ease, border-color 160ms ease; }
+.icon-button { display: inline-grid; width: 48px; height: 48px; place-items: center; border: 2px solid var(--ink); background: #fff; color: var(--ink); cursor: pointer; transition: background 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease; }
 .icon-button:hover, .icon-button:focus-visible { border-color: var(--ink); background: var(--ink); color: #fff; }
+.icon-button:hover { transform: translateY(-1px); }
 .table-wrap { margin-top: 20px; border: 1px solid var(--line); background: #fff; }
 table { min-width: 880px; }
 th { padding-top: 13px; padding-bottom: 13px; background: var(--ink); color: #fff; }
@@ -331,7 +333,7 @@ td { padding-top: 15px; padding-bottom: 15px; }
 tbody tr:hover td { background: #fbfaf5; }
 .bill-summary { margin-top: 20px; }
 .summary-item { background: #fff; }
-.overall-total { background: #000; }
+.overall-total { background: var(--ink); }
 .room-share-counts { margin-top: 14px; }
 
 @media (max-width: 960px) {
