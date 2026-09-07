@@ -301,6 +301,10 @@ td:last-child { font-family: var(--heading); font-size: 1.05rem; }
 .app-header .eyebrow { margin-bottom: 6px; }
 .brand-mark { display: grid; width: 44px; height: 44px; place-items: center; background: var(--ink); color: #fff; font: 700 0.85rem var(--heading); letter-spacing: 0.08em; }
 .header-meta { display: flex; align-items: center; gap: 8px; margin-left: auto; color: var(--muted); font-size: 0.72rem; }
+.month-selector { margin-left: 10px; }
+.month-selector select { min-width: 148px; padding: 9px 28px 9px 10px; border: 1px solid var(--line); background: #fff; color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
+.month-selector select:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.12); }
 .workspace { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 22px; }
 .panel { border: 1px solid var(--line); background: rgba(255, 255, 255, 0.88); }
@@ -348,7 +352,9 @@ tbody tr:hover td { background: #fbfaf5; }
 @media (max-width: 600px) {
   .app-shell { width: min(100% - 24px, 560px); padding-top: 24px; }
   .app-header { align-items: flex-start; }
-  .header-meta { display: none; }
+  .header-meta { display: flex; }
+  .header-meta > span:not(.status-dot) { display: none; }
+  .month-selector { margin-left: 4px; }
   .bill-panel, .results { padding: 18px; }
   .panel-heading, .results-heading { flex-direction: row; }
   .bill-input-grid { grid-template-columns: 1fr; }

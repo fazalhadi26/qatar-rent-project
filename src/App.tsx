@@ -20,6 +20,21 @@ const roomNames = [
   'Liaqat Haji Room',
 ]
 
+const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
+
 type AddedExpense = { name: string; amount: number }
 
 function App() {
@@ -30,6 +45,7 @@ function App() {
   const [expenseAmount, setExpenseAmount] = useState('')
   const [addedExpenses, setAddedExpenses] = useState<AddedExpense[]>([])
   const [roomPeople, setRoomPeople] = useState<string[]>(() => roomNames.map(() => ''))
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth())
   const billAmount = Number(electricityBill) || 0
   const waterAmount = Number(waterBill) || 0
   const wifiAmount = Number(wifiBill) || 0
@@ -39,9 +55,10 @@ function App() {
   const sharedMonthlyTotal = waterAmount + wifiAmount + addedExpenseTotal
   const totalPeople = roomPeople.reduce((total, people) => total + (Number(people) || 0), 0)
   const allRoomsFilled = roomPeople.every((people) => people.trim() !== '' && Number(people) > 0)
-  const totalPersonDays = totalPeople * 31
+  const daysInSelectedMonth = new Date(new Date().getFullYear(), selectedMonth + 1, 0).getDate()
+  const totalPersonDays = totalPeople * daysInSelectedMonth
   const dailyPerPerson = allRoomsFilled ? sharedMonthlyTotal / totalPersonDays : 0
-  const monthlyPerPerson = allRoomsFilled ? dailyPerPerson * 31 : 0
+  const monthlyPerPerson = allRoomsFilled ? dailyPerPerson * daysInSelectedMonth : 0
 
   const updateRoomPeople = (index: number, value: string) => {
     setRoomPeople((people) => people.map((current, currentIndex) => currentIndex === index ? value : current))
@@ -148,6 +165,19 @@ function App() {
         <div className="header-meta">
           <span className="status-dot" aria-hidden="true" />
           <span>Ready to calculate</span>
+          <label className="month-selector" htmlFor="selected-month">
+            <span className="sr-only">Select month</span>
+            <select
+              id="selected-month"
+              value={selectedMonth}
+              onChange={(event) => setSelectedMonth(Number(event.target.value))}
+            >
+              {monthNames.map((month, index) => {
+                const days = new Date(new Date().getFullYear(), index + 1, 0).getDate()
+                return <option value={index} key={month}>{month} ({days} days)</option>
+              })}
+            </select>
+          </label>
         </div>
       </header>
 
